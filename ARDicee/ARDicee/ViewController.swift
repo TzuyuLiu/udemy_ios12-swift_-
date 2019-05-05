@@ -54,6 +54,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     //偵測到有觸控螢幕時會觸發以下method
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         if let touch = touches.first{
             let touchLocation = touch.location(in: sceneView)  //傳觸碰的地方，使用的資料型態是2D位置
             
@@ -77,6 +78,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if let diceNode = dicescene.rootNode.childNode(withName: "Dice", recursively: true){
             
             //y的boundingSphere：因為y的參數是用一半高一半低的方式算出，所以用此來矯正不讓骰子飄浮起來
+            //將位置轉換成現實世界的位置
             diceNode.position = SCNVector3(
                 x: location.worldTransform.columns.3.x,
                 y: location.worldTransform.columns.3.y + diceNode.boundingSphere.radius,
